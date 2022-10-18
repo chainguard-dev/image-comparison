@@ -5,7 +5,7 @@ to others
 
 ## Overview
 
-Each day for 30 days (from August 16, 2022 to Septemeber 14, 2022), we
+Each day for 30 days (from September 15, 2022 to October 14, 2022), we
 ran security scans using [Trivy](https://github.com/aquasecurity/trivy)
 against the following images:
 
@@ -35,7 +35,7 @@ An image reference with a digest comes in the following form:
 ```
 
 For example, for the Chainguard NGINX image scanned on September 12, 2022
-(row 15 in the CSV), the image reference with a digest would be:
+(row 15 in the [CSV](./previous/data-aug-sep-2022.csv)), the image reference with a digest would be:
 
 ```
 cgr.dev/chainguard/nginx@sha256:d08d864569e20105bed1d4f58b852ea3d810e7d26ec0280011dcae1135421f3f
@@ -72,7 +72,7 @@ the scan:
 2. Compare the time of the scan to the date when a vulnerable package was patched/released.
 
 For example, when running a new Trivy scan on September 21, 2022 against the Chainguard
-NGINX image scanned on August 16, 2022 (row 177 in the CSV), the following 2 CVEs are detected
+NGINX image scanned on August 16, 2022 (row 177 in the [CSV](./previous/data-aug-sep-2022.csv)), the following 2 CVEs are detected
 which were not previously detected:
 
 ```
