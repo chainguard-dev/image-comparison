@@ -8,7 +8,7 @@ python test.py
 import os
 import unittest
 
-import pandas as pd
+import pandas as pd  # pylint: disable=import-error
 
 from filter_data import filter_df
 
