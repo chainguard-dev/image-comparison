@@ -20,6 +20,7 @@ class TestFilterDataFunctions(unittest.TestCase):
 
     def test_filter_df(self):
         """Test filter_df()."""
+        # pylint: disable=invalid-name
         TEST_INPUT_DATA = os.path.join(DIR_PATH, "test_data", "test_input_data.csv")
         TEST_EXPECTED_DATA = os.path.join(
             DIR_PATH, "test_data", "test_expected_data.csv"
