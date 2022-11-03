@@ -22,15 +22,14 @@ def filter_df(df, starting_day=None, ending_day=None):
     Returns:
         filtered_df (pandas dataframe)
     """
-    start = '06/11/2013'
-    start = datetime.strptime(today, "%m/%d/%Y") #string to date
+    today = datetime.today().strftime('%Y-%m-%d')
 
     if starting_day is None:
         # set to 32 days ago
-        starting_day = datetime.strptime(start, "%Y/%m/%d") - timedelta(days=32)
+        starting_day = datetime.strptime(today, "%Y/%m/%d") - timedelta(days=32)
     if ending_day is None:
         # set to 2 days ago
-        starting_day = datetime.strptime(start, "%Y/%m/%d") - timedelta(days=2)
+        starting_day = datetime.strptime(today, "%Y/%m/%d") - timedelta(days=2)
 
     # Filter in only trivy scan results
     filtered_df = df[df["scanner"] == "trivy"]
@@ -55,5 +54,8 @@ def filter_df(df, starting_day=None, ending_day=None):
     # drop negligible_cve_cnt since that is a grype-related column and
     # doesn't apply to trivy scans
     filtered_df = filtered_df.drop(columns=["success", "negligible_cve_cnt"])
+
+    # reset index (done to enable reproducibility during testing)
+    filtered_df = filtered_df.reset_index(drop=True)
 
     return filtered_df
