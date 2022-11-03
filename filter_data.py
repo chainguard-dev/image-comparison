@@ -2,6 +2,8 @@
 
 import os
 
+from datetime import datetime, timedelta
+
 import pandas as pd
 
 def filter_df(df, starting_day=None, ending_day=None):
@@ -20,20 +22,21 @@ def filter_df(df, starting_day=None, ending_day=None):
     Returns:
         filtered_df (pandas dataframe)
     """
+    start = '06/11/2013'
+    start = datetime.strptime(today, "%m/%d/%Y") #string to date
 
-    if starting_day is not None:
+    if starting_day is None:
         # set to 32 days ago
-        pass
-    if ending_day is not None:
+        starting_day = datetime.strptime(start, "%Y/%m/%d") - timedelta(days=32)
+    if ending_day is None:
         # set to 2 days ago
-        pass
+        starting_day = datetime.strptime(start, "%Y/%m/%d") - timedelta(days=2)
 
     # Filter in only trivy scan results
     filtered_df = df[df["scanner"] == "trivy"]
 
     # Filter in observations between certain dates
-    # TODO: use starting_day and ending_day
-    filtered_df = filtered_df[(filtered_df["time"] >= "2022-08-16") & (filtered_df["time"] <= "2022-09-15")]
+    filtered_df = filtered_df[(filtered_df["time"] >= starting_day) & (filtered_df["time"] <= ending_day)]
 
     # filter in only nginx, php, and go images
     # (both chainguard images version and Dockerhub equivalent)
