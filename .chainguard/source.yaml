@@ -1,0 +1,8 @@
+# Copyright 2022 Chainguard, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+spec:
+  authorities:
+    - key:
+        # Allow commits signed by GitHub.
+        kms: https://github.com/web-flow.gpg
