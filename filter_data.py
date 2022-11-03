@@ -1,13 +1,9 @@
 """Filter base image CVE data before publication."""
 
-import os
-
 from datetime import datetime, timedelta
 
-import pandas as pd
 
-
-def filter_df(df, starting_day=None, ending_day=None):
+def filter_df(dataframe, starting_day=None, ending_day=None):
     """Filter pandas dataframe before publication.
 
     Filters include:
@@ -16,7 +12,7 @@ def filter_df(df, starting_day=None, ending_day=None):
       -nginx, php, and go images (cgr.dev and Docker Hub equivalents)
 
     Args:
-        df (pandas dataframe)
+        dataframe (pandas dataframe)
         starting_day (time)
         ending_day (time)
 
@@ -33,7 +29,7 @@ def filter_df(df, starting_day=None, ending_day=None):
         starting_day = datetime.strptime(today, "%Y/%m/%d") - timedelta(days=2)
 
     # Filter in only trivy scan results
-    filtered_df = df[df["scanner"] == "trivy"]
+    filtered_df = dataframe[dataframe["scanner"] == "trivy"]
 
     # Filter in observations between certain dates
     filtered_df = filtered_df[
@@ -42,6 +38,7 @@ def filter_df(df, starting_day=None, ending_day=None):
 
     # filter in only nginx, php, and go images
     # (both chainguard images version and Dockerhub equivalent)
+    # pylint: disable=invalid-name
     IMAGE_LIST = [
         "cgr.dev/chainguard/php:latest",
         "cgr.dev/chainguard/go:latest",
