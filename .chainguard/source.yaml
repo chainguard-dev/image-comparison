@@ -3,6 +3,12 @@
 
 spec:
   authorities:
+    - keyless:
+        identities:
+          - issuer: https://accounts.google.com
+    - keyless:
+        identities:
+          - issuer: https://github.com/login/oauth
     - key:
-        # Allow commits signed by GitHub.
+        # allow commits signed by GitHub, e.g. the UI
         kms: https://github.com/web-flow.gpg
