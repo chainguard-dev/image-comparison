@@ -13,8 +13,8 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
 
     Args:
         dataframe (pandas dataframe)
-        starting_day (time)
-        ending_day (time)
+        starting_day (time) - day on which to begin filtering data
+        ending_day (time) - day on which to stop filtering data
 
     Returns:
         filtered_df (pandas dataframe)
