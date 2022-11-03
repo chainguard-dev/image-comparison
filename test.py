@@ -26,7 +26,7 @@ class TestFilterDataFunctions(unittest.TestCase):
             DIR_PATH, "test_data", "test_expected_data.csv"
         )
         input_df = pd.read_csv(TEST_INPUT_DATA, parse_dates=["time"])
-        df_got = filter_df(input_df)
+        df_got = filter_df(input_df, starting_day="2022-11-01", ending_day="2022-11-03")
         df_expected = pd.read_csv(TEST_EXPECTED_DATA, parse_dates=["time"])
 
         pd.testing.assert_frame_equal(df_got, df_expected)
