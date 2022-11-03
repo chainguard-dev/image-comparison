@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 
+
 def filter_df(df, starting_day=None, ending_day=None):
     """Filter pandas dataframe before publication.
 
@@ -22,7 +23,7 @@ def filter_df(df, starting_day=None, ending_day=None):
     Returns:
         filtered_df (pandas dataframe)
     """
-    today = datetime.today().strftime('%Y-%m-%d')
+    today = datetime.today().strftime("%Y-%m-%d")
 
     if starting_day is None:
         # set to 32 days ago
@@ -35,7 +36,9 @@ def filter_df(df, starting_day=None, ending_day=None):
     filtered_df = df[df["scanner"] == "trivy"]
 
     # Filter in observations between certain dates
-    filtered_df = filtered_df[(filtered_df["time"] >= starting_day) & (filtered_df["time"] <= ending_day)]
+    filtered_df = filtered_df[
+        (filtered_df["time"] >= starting_day) & (filtered_df["time"] <= ending_day)
+    ]
 
     # filter in only nginx, php, and go images
     # (both chainguard images version and Dockerhub equivalent)
