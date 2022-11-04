@@ -1,1 +1,6 @@
 __pycache__/*
+# use --force to update data.csv
+# this file is in .gitignore since there will be
+# many times a programmer runs main.py but does not
+# actually want to update.csv
+data.csv
