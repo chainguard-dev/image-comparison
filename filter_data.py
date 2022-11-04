@@ -19,14 +19,13 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     Returns:
         filtered_df (pandas dataframe)
     """
-    today = datetime.today().strftime("%Y-%m-%d")
-
+    today = datetime.today()
     if starting_day is None:
         # set to 32 days ago
-        starting_day = datetime.strptime(today, "%Y/%m/%d") - timedelta(days=32)
+        starting_day = today - timedelta(days=32)
     if ending_day is None:
         # set to 2 days ago
-        starting_day = datetime.strptime(today, "%Y/%m/%d") - timedelta(days=2)
+        ending_day = today - timedelta(days=2)
 
     # Filter in only trivy scan results
     filtered_df = dataframe[dataframe["scanner"] == "trivy"]
