@@ -1,0 +1,42 @@
+name: pull-data
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # runs at 12:00 UTC everyday
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v2
+
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          
+      - name: install python packages
+        # TODO: use pipenv
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: execute py script
+        env: 
+          DATA_URL: ${{ secrets.DATA_URL }}
+        run: python main.py
+          
+      - name: commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -a data.csv
+          git commit -m "update data"
+          
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main 
