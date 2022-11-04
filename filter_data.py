@@ -1,5 +1,7 @@
 """Filter base image CVE data before publication."""
 
+import logging
+
 from datetime import datetime, timedelta
 
 
@@ -19,13 +21,18 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     Returns:
         filtered_df (pandas dataframe)
     """
+    logging.info("Starting filtering operation")
+
     today = datetime.today()
+    logging.info("today: %s", today)
     if starting_day is None:
         # set to 32 days ago
         starting_day = today - timedelta(days=32)
     if ending_day is None:
         # set to 2 days ago
         ending_day = today - timedelta(days=2)
+    logging.info("starting_day: %s", starting_day)
+    logging.info("ending_day: %s", ending_day)
 
     # Filter in only trivy scan results
     filtered_df = dataframe[dataframe["scanner"] == "trivy"]
@@ -57,4 +64,5 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     # reset index (done to enable reproducibility during testing)
     filtered_df = filtered_df.reset_index(drop=True)
 
+    logging.info("Finished filtering operation")
     return filtered_df
