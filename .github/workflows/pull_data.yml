@@ -27,14 +27,17 @@ jobs:
         env: 
           DATA_URL: ${{ secrets.DATA_URL }}
         run: python main.py
-          
+      
+      - name: use gitsign
+        uses: wlynch/gitsign-action@main
+  
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -a data.csv
           git commit -m "update data"
-          
+
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
