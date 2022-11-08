@@ -1,6 +1,7 @@
 name: pull-data
 
 on:
+  workflow_dispatch: {}
   schedule:
     - cron: '0 12 * * *' # runs at 12:00 UTC everyday
 
