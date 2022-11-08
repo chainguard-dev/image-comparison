@@ -34,4 +34,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add data.csv
           git commit -m "update data"
-          git push
+          git push origin main
