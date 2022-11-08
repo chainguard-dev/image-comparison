@@ -27,8 +27,6 @@ jobs:
         env: 
           DATA_URL: ${{ secrets.DATA_URL }}
         run: pipenv run python main.py
-      
-      - uses: chainguard-dev/actions/setup-gitsign@main
   
       - name: commit files
         run: |
@@ -36,9 +34,4 @@ jobs:
           git config --local user.name "GitHub Action"
           git add data.csv
           git commit -m "update data"
-
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          git push
