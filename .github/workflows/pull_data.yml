@@ -28,8 +28,7 @@ jobs:
           DATA_URL: ${{ secrets.DATA_URL }}
         run: pipenv run python main.py
       
-      - name: use gitsign
-        uses: wlynch/gitsign-action@main
+      - uses: chainguard-dev/actions/setup-gitsign@main
   
       - name: commit files
         run: |
