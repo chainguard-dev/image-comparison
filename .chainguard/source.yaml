@@ -6,9 +6,9 @@ spec:
     - keyless:
         identities:
           - issuer: https://accounts.google.com
-    - keyless:
-        identities:
           - issuer: https://github.com/login/oauth
+          - issuer: https://token.actions.githubusercontent.com
+            subject: https://github.com/chainguard-dev/image-comparison/.github/workflows/pull_data.yml@refs/heads/main 
     - key:
         # allow commits signed by GitHub, e.g. the UI
         kms: https://github.com/web-flow.gpg
