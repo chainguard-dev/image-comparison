@@ -36,3 +36,12 @@ jobs:
           git add data.csv
           git commit -m "update data"
           git push origin main
+      - if: ${{ failure() && github.event_name == 'schedule' }}
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_COLOR: '#8E1600'
+          MSG_MINIMAL: 'true'
+          SLACK_TITLE: pull-data failed.
+          SLACK_MESSAGE: |
+            For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
