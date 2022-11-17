@@ -36,6 +36,7 @@ jobs:
           git add data.csv
           git commit -m "update data"
           git push origin main
+          exit 1
       - if: ${{ failure() && github.event_name == 'schedule' }}
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
