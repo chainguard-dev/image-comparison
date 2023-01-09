@@ -5,8 +5,7 @@ to others
 
 ## Overview
 
-Each day for 30 days (from September 15, 2022 to October 14, 2022), we
-ran security scans using [Trivy](https://github.com/aquasecurity/trivy)
+We run security scans using [Trivy](https://github.com/aquasecurity/trivy)
 against the following images:
 
 - `golang:latest`
@@ -17,6 +16,7 @@ against the following images:
 - `cgr.dev/chainguard/php:latest` (Chainguard)
 
 The final results of this process can be found in [`data.csv`](./data.csv).
+This is the last thirty days of results.
 
 ## Reproducing the results
 
