@@ -9,7 +9,7 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     """Filter pandas dataframe before publication.
 
     Filters include:
-      -trivy results only
+      -grype results only
       -32 days to 2 days ago (to allow time for debugging if issues arises)
       -nginx, php, and go images (cgr.dev and Docker Hub equivalents)
 
@@ -35,7 +35,7 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     logging.info("ending_day: %s", ending_day)
 
     # Filter in only trivy scan results
-    filtered_df = dataframe[dataframe["scanner"] == "trivy"]
+    filtered_df = dataframe[dataframe["scanner"] == "grype"]
 
     # Filter in observations between certain dates
     filtered_df = filtered_df[
@@ -55,11 +55,15 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     ]
     filtered_df = filtered_df[filtered_df["image"].isin(IMAGE_LIST)]
 
+    # to ensure only one sample for each image from a given day is
+    # used, drop duplicates
+    filtered_df = filtered_df.drop_duplicates(
+        subset=["image", "scanner", "time"], keep="last"
+    )
+
     # drop "success" column since that is only interesting for
     # internal chainguard quality control purposes
-    # drop negligible_cve_cnt since that is a grype-related column and
-    # doesn't apply to trivy scans
-    filtered_df = filtered_df.drop(columns=["success", "negligible_cve_cnt"])
+    filtered_df = filtered_df.drop(columns=["success"])
 
     # reset index (done to enable reproducibility during testing)
     filtered_df = filtered_df.reset_index(drop=True)
