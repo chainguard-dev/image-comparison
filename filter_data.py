@@ -57,7 +57,7 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
 
     # to ensure only one sample for each image from a given day is
     # used, drop duplicates
-    filtered_df = filtered_df.drop_duplicates(subset=["image", "time"], keep="last")
+    filtered_df = filtered_df.drop_duplicates(subset=["image", "scanner", "time"], keep="last")
 
     # drop "success" column since that is only interesting for
     # internal chainguard quality control purposes
