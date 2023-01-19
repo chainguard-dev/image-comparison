@@ -1,4 +1,4 @@
-,image,scanner,scanner_version,scanner_db_version,time,low_cve_cnt,med_cve_cnt,high_cve_cnt,crit_cve_cnt,negligible_cve_cnt,unknown_cve_cnt,tot_cve_cnt,digest
+,image,scanner,scanner_version,scanner_db_version,time,low_cve_cnt,med_cve_cnt,high_cve_cnt,crit_cve_cnt,unknown_cve_cnt,tot_cve_cnt,digest
 0,cgr.dev/chainguard/go:latest,trivy,0.36.1,2023-01-16 12:07:39.701805644 +0000 UTC,2023-01-16 14:35:27,0,0,0,0,0,0,sha256:997ce7fa1e06fbb48d9bbfc9d94f219cee1f65ce950daaad853333fc87e3cc49
 1,cgr.dev/chainguard/nginx:latest,trivy,0.36.1,2023-01-16 12:07:39.701805644 +0000 UTC,2023-01-16 14:55:11,0,0,0,0,0,0,sha256:56116e0095ecfed56a887330743a1c190ef300de00b131081c0544c0a9401de1
 2,cgr.dev/chainguard/php:latest,trivy,0.36.1,2023-01-16 12:07:39.701805644 +0000 UTC,2023-01-16 14:55:41,0,0,0,0,0,0,sha256:194c852460b52e70f4dbd704678bc26eee022d20407a612371adccddcbfca80e
