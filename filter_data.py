@@ -63,6 +63,8 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
 
     # drop "success" column since that is only interesting for
     # internal chainguard quality control purposes
+    # note: the negligible CVE count column should not be dropped
+    # when using grype
     filtered_df = filtered_df.drop(columns=["success"])
 
     # reset index (done to enable reproducibility during testing)
