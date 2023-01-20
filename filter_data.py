@@ -63,7 +63,7 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
 
     # drop "success" column since that is only interesting for
     # internal chainguard quality control purposes
-    filtered_df = filtered_df.drop(columns=["success", "negligible_cve_cnt"])
+    filtered_df = filtered_df.drop(columns=["success"])
 
     # reset index (done to enable reproducibility during testing)
     filtered_df = filtered_df.reset_index(drop=True)
