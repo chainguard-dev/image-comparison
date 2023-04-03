@@ -1,0 +1,45 @@
+name: gen-html
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # runs twice daily, at 00:00 UTC and 12:00 UTC
+    - cron: '0 0 * * *' 
+    - cron: '0 12 * * *'
+
+jobs:
+  build:
+    permissions:
+      id-token: write # Enable OIDC
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+      - uses: imjasonh/setup-crane@v0.3
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - run: |
+          ./gen-html.sh
+      - name: gitsign
+        uses: chainguard-dev/actions/setup-gitsign@main
+      - name: commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add html/*.html
+          git commit -m "update html"
+          git push origin main
+      # TODO: enable this slack alert if generally stable
+      # - if: ${{ failure() && github.event_name == 'schedule' }}
+      #   uses: rtCamp/action-slack-notify@v2.2.0
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     SLACK_COLOR: '#8E1600'
+      #     MSG_MINIMAL: 'true'
+      #     SLACK_TITLE: gen-html failed.
+      #     SLACK_MESSAGE: |
+      #       For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
