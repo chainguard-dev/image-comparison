@@ -51,7 +51,7 @@ function main {
 
         generated_at_timestamp="$(epoch_now)"
 
-        cat html/image-comparison.template.html | \
+        cat comparison.template.html | \
             sed "s|{{imageName}}|${image_name}|g" | \
             sed "s|{{oursCvesNum}}|${ours_cves_num}|g" | \
             sed "s|{{oursSizeNum}}|${ours_size_num}|g" | \
@@ -62,7 +62,7 @@ function main {
             sed "s|{{theirsSizeUnit}}|${theirs_size_unit}|g" | \
             sed "s|{{theirsTimestamp}}|${theirs_timestamp}|g" | \
             sed "s|{{generatedAtTimestamp}}|${generated_at_timestamp}|g" > \
-                "html/image-comparison-${image_key}.html"
+                "comparison-${image_key}.html"
     done
 }
 
