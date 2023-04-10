@@ -69,6 +69,9 @@ img {user-drag: none;user-select: none;-moz-user-select: none;-webkit-user-drag:
   .rich-text.unc-detail p {
     font-size: 16px;
   }
+  h2 {
+    font-size: 24px !important;
+}
 }
 .logo-flex, .overflow-scroll-wrap {
     -ms-overflow-style: none; 
