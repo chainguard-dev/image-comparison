@@ -34,7 +34,7 @@ def filter_df(dataframe, starting_day=None, ending_day=None):
     logging.info("starting_day: %s", starting_day)
     logging.info("ending_day: %s", ending_day)
 
-    # Filter in only trivy scan results
+    # Filter in only grype scan results
     filtered_df = dataframe[dataframe["scanner"] == "grype"]
 
     # Filter in observations between certain dates

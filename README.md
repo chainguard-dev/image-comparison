@@ -5,7 +5,7 @@ to others
 
 ## Overview
 
-We run security scans using [grype]([https://github.com/aquasecurity/trivy](https://github.com/anchore/grype))
+We run security scans using [grype](https://github.com/anchore/grype)
 against the following images:
 
 - `golang:latest`
