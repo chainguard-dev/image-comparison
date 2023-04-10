@@ -72,6 +72,13 @@ img {user-drag: none;user-select: none;-moz-user-select: none;-webkit-user-drag:
   h2 {
     font-size: 24px !important;
 }
+  .text-title-1.is-small {
+    font-size: 12px;
+}
+  .text-body-02 {
+
+    font-size: 12px;
+}
 }
 .logo-flex, .overflow-scroll-wrap {
     -ms-overflow-style: none; 
