@@ -69,6 +69,10 @@ img {user-drag: none;user-select: none;-moz-user-select: none;-webkit-user-drag:
   .rich-text.unc-detail p {
     font-size: 16px;
   }
+
+}
+
+@media screen and (max-width: 395px) {
   h2 {
     font-size: 24px !important;
 }
@@ -76,10 +80,10 @@ img {user-drag: none;user-select: none;-moz-user-select: none;-webkit-user-drag:
     font-size: 12px;
 }
   .text-body-02 {
-
     font-size: 12px;
 }
 }
+
 .logo-flex, .overflow-scroll-wrap {
     -ms-overflow-style: none; 
     scrollbar-width: none; 
