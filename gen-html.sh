@@ -37,8 +37,14 @@ function main {
         theirs_cves_num="$(cat data.csv | grep ",${theirs_ref}" | head -1 | cut -d, -f12)"
 
         ours_size="$(image_size "${ours_ref}")"
-        ours_crane_resp="$(crane config "${ours_ref}")"
-        ours_timestamp="$(epoch "$(echo "${ours_crane_resp}" | jq -r '.created')")"
+
+        # The "created" field in the image config now represents the
+        # last time a package in the image was updated. Instead of looking at this
+        # field to determine the last time the image was rebuilt, check the latest signature.
+        # For more info, see https://www.chainguard.dev/unchained/designing-build-date-epoch-in-chainguard-images
+        #ours_crane_resp="$(crane config "${ours_ref}")"
+        #ours_timestamp="$(epoch "$(echo "${ours_crane_resp}" | jq -r '.created')")"
+        ours_timestamp="$(epoch "$(cosign download signature "${ours_ref}" | tail -n1 | jq -r .Cert.NotBefore)")"
 
         theirs_size="$(image_size "${theirs_ref}")"
         theirs_crane_resp="$(crane config "${theirs_ref}")"

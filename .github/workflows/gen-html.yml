@@ -18,6 +18,7 @@ jobs:
       - name: checkout repo content
         uses: actions/checkout@v2
       - uses: imjasonh/setup-crane@v0.3
+      - uses: sigstore/cosign-installer@v3.0.5
       - name: setup python
         uses: actions/setup-python@v2
         with:
