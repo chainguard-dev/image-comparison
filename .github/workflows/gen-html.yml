@@ -16,11 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v2
-      - uses: imjasonh/setup-crane@v0.3
-      - uses: sigstore/cosign-installer@v3.0.5
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      - uses: imjasonh/setup-crane@00c9e93efa4e1138c9a7a5c594acd6c75a2fbf0c # v0.3
+      - uses: sigstore/cosign-installer@9614fae9e5c5eddabb09f90a270fcb487c9f71499614fae9e5c5eddabb09f90a270fcb487c9f7149 # v3.2.0
       - name: setup python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
         with:
           python-version: '3.10'
       - run: |
@@ -35,7 +35,7 @@ jobs:
           git commit -m "update html"
           git push origin main
       - if: ${{ failure() && github.event_name == 'schedule' }}
-        uses: rtCamp/action-slack-notify@v2.2.0
+        uses: rtCamp/action-slack-notify@f05987dc91a66984f1666f486497def2cf85183d # v2.2.0
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_COLOR: '#8E1600'
