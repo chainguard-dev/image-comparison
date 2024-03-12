@@ -9,25 +9,29 @@ on:
 
 jobs:
   build:
-    permissions:
-      id-token: write # Enable OIDC
-      pull-requests: write
-      contents: write
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Needed for gitsign auth
+      contents: write # Needed to commit files back to repo
     steps:
       - name: checkout repo content
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.2
       - uses: imjasonh/setup-crane@00c9e93efa4e1138c9a7a5c594acd6c75a2fbf0c # v0.3
       - uses: sigstore/cosign-installer@e1523de7571e31dbe865fd2e80c5c7c23ae71eb4 # v3.4.0
       - name: setup python
         uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
         with:
-          python-version: '3.10'
-      - run: |
+          python-version: '3.12'
+      - name: execute shell script
+        id: run
+        run: |
           ./gen-html.sh
+          echo "is_git_diff=$(git diff-index --quiet HEAD -- && echo true || echo false)" >> $GITHUB_ENV
       - name: gitsign
+        if: ${{ steps.run.outputs.is_git_diff == 'true' }}
         uses: chainguard-dev/actions/setup-gitsign@main
       - name: commit files
+        if: ${{ steps.run.outputs.is_git_diff == 'true' }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -35,7 +39,7 @@ jobs:
           git commit -m "update html"
           git push origin main
       - if: ${{ failure() && github.event_name == 'schedule' }}
-        uses: rtCamp/action-slack-notify@f05987dc91a66984f1666f486497def2cf85183d # v2.2.0
+        uses: rtCamp/action-slack-notify@b24d75fe0e728a4bf9fc42ee217caa686d141ee8 # v2.2.1
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_COLOR: '#8E1600'
