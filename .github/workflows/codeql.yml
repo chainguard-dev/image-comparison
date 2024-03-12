@@ -13,9 +13,8 @@ jobs:
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
-      actions: read
-      contents: read
-      security-events: write
+      contents: read         # Needed to clone source code
+      security-events: write # Needed to publish security issues
 
     strategy:
       fail-fast: false
@@ -24,20 +23,20 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4.1.0
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.2
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@575ef88c9afdeaf75de39e76d34ec226dae55960 # v3
+      uses: github/codeql-action/init@8a470fddafa5cbb6266ee11b37ef4d8aae19c571 # v3.24.6
       with:
         languages: ${{ matrix.language }}
-        
+
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     - name: Autobuild
-      uses: github/codeql-action/autobuild@575ef88c9afdeaf75de39e76d34ec226dae55960 # v3
+      uses: github/codeql-action/autobuild@8a470fddafa5cbb6266ee11b37ef4d8aae19c571 # v3.24.6
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@575ef88c9afdeaf75de39e76d34ec226dae55960 #v3
+      uses: github/codeql-action/analyze@8a470fddafa5cbb6266ee11b37ef4d8aae19c571 # v3.24.6
       with:
         category: "/language:${{matrix.language}}"
