@@ -28,7 +28,7 @@ jobs:
           DATA_URL: ${{ secrets.DATA_URL }}
         run:
           pipenv run python main.py
-          echo "is_git_diff=$(git diff-index --quiet HEAD -- && echo true || echo false)" >> $GITHUB_ENV
+          echo "is_git_diff=$(git diff-index --quiet HEAD -- && echo false || echo true)" >> $GITHUB_ENV
       - name: gitsign
         if: ${{ steps.run.outputs.is_git_diff == 'true' }}
         uses: chainguard-dev/actions/setup-gitsign@main
