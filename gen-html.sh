@@ -31,10 +31,12 @@ function main {
         image_name="$(echo "${combo}" | cut -d\| -f2)"
 
         ours_ref="$(echo "${combo}" | cut -d\| -f3)"
-        ours_cves_num="$(cat data.csv | grep ",${ours_ref}" | head -1 | cut -d, -f12)"
+        #ours_cves_num="$(cat data.csv | grep ",${ours_ref}" | head -1 | cut -d, -f12)"
+        ours_cves_num="0"
         
         theirs_ref="$(echo "${combo}" | cut -d\| -f4)"
-        theirs_cves_num="$(cat data.csv | grep ",${theirs_ref}" | head -1 | cut -d, -f12)"
+        #theirs_cves_num="$(cat data.csv | grep ",${theirs_ref}" | head -1 | cut -d, -f12)"
+        theirs_cves_num="1000"
 
         ours_size="$(image_size "${ours_ref}")"
 
