@@ -26,12 +26,9 @@ jobs:
         id: run
         run: |
           ./gen-html.sh
-          echo "is_git_diff=$(git diff-index --quiet HEAD -- && echo false || echo true)" >> $GITHUB_ENV
       - name: gitsign
-        if: ${{ steps.run.outputs.is_git_diff == 'true' }}
         uses: chainguard-dev/actions/setup-gitsign@main
       - name: commit files
-        if: ${{ steps.run.outputs.is_git_diff == 'true' }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
