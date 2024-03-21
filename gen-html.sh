@@ -8,17 +8,21 @@ set -ex
 
 function epoch {
     ts="$(echo "${1}" | cut -d. -f1 | sed 's|Z||')"
-    python3 -c "from datetime import datetime as dt; t = dt.strptime('${ts}', '%Y-%m-%dT%H:%M:%S'); print(int((t - dt(1970, 1, 1)).total_seconds() * 1000))"
+    python3 -c "import os; os.environ['TZ'] = 'UTC'; from datetime import datetime as dt; t = dt.strptime('${ts}', '%Y-%m-%dT%H:%M:%S'); print(int((t - dt(1970, 1, 1)).total_seconds() * 1000))"
 }
 
 function epoch_now {
-    python3 -c "from datetime import datetime as dt; t = dt.now(); print(int((t - dt(1970, 1, 1)).total_seconds() * 1000))"
+    python3 -c "import os; os.environ['TZ'] = 'UTC'; from datetime import datetime as dt; t = dt.now(); print(int((t - dt(1970, 1, 1)).total_seconds() * 1000))"
 }
 
 # Inspired by https://gist.github.com/imjasonh/ce437a40160acab17030d024d4680fd2
 function image_size {
     size="$(crane manifest $1 --platform ${2:-linux/amd64} | jq '.config.size + ([.layers[].size] | add)' | numfmt --to=iec)"
     echo "${size}" | sed 's|K| KB|' | sed 's|M| MB|' | sed 's|G| GB|' | sed 's|T| TB|'
+}
+
+function num_cves {
+    docker run --rm cgr.dev/chainguard/grype $1 -o json 2>/dev/null | jq '.matches | length' 
 }
 
 function main {
@@ -31,10 +35,10 @@ function main {
         image_name="$(echo "${combo}" | cut -d\| -f2)"
 
         ours_ref="$(echo "${combo}" | cut -d\| -f3)"
-        ours_cves_num="$(cat data.csv | grep ",${ours_ref}" | head -1 | cut -d, -f12)"
+        ours_cves_num="$(num_cves "${ours_ref}")"
         
         theirs_ref="$(echo "${combo}" | cut -d\| -f4)"
-        theirs_cves_num="$(cat data.csv | grep ",${theirs_ref}" | head -1 | cut -d, -f12)"
+        theirs_cves_num="$(num_cves "${theirs_ref}")"
 
         ours_size="$(image_size "${ours_ref}")"
 
