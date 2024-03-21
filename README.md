@@ -14,6 +14,3 @@ against the following images:
 - `cgr.dev/chainguard/go:latest` (Chainguard)
 - `cgr.dev/chainguard/nginx:latest` (Chainguard)
 - `cgr.dev/chainguard/php:latest` (Chainguard)
-
-The final results of this process can be found in [`data.csv`](./data.csv).
-This is the last thirty days of results.
