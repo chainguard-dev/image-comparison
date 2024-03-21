@@ -35,10 +35,10 @@ function main {
         image_name="$(echo "${combo}" | cut -d\| -f2)"
 
         ours_ref="$(echo "${combo}" | cut -d\| -f3)"
-        ours_cves_num="$(num_cves "${ours_ref})"
+        ours_cves_num="$(num_cves "${ours_ref}")"
         
         theirs_ref="$(echo "${combo}" | cut -d\| -f4)"
-        theirs_cves_num="$(num_cves "${theirs_ref})"
+        theirs_cves_num="$(num_cves "${theirs_ref}")"
 
         ours_size="$(image_size "${ours_ref}")"
 
