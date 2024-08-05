@@ -22,6 +22,12 @@ jobs:
         uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
         with:
           python-version: '3.12'
+      - name: Set up Octo-STS
+        uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f # v1.0.0
+        id: octo-sts
+        with:
+          scope: chainguard-dev/image-comparison
+          identity: image-comparison
       - name: execute shell script
         id: run
         run: |
@@ -30,8 +36,6 @@ jobs:
         uses: chainguard-dev/actions/setup-gitsign@main
       - name: commit files
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git add *.html
           git commit -m "update html"
           git push origin main
