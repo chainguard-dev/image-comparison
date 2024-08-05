@@ -27,7 +27,7 @@ jobs:
         id: octo-sts
         with:
           scope: chainguard-dev/image-comparison
-          identity: image-comparison
+          identity: gen-html
       - name: execute shell script
         id: run
         run: |
