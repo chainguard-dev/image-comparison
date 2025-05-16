@@ -7,8 +7,7 @@ on:
     - cron: '0 1 * * *' 
     - cron: '0 13 * * *'
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
