@@ -40,7 +40,7 @@ jobs:
         run: |
           ./gen-html.sh
       - name: gitsign
-        uses: chainguard-dev/actions/setup-gitsign@7d40b853210d271a28ac2822827f965f6f1e78fa # main
+        uses: chainguard-dev/actions/setup-gitsign@ec48ea414c0cb207549029d8fe35f8f01e563219 # v1.0.8
       - name: commit files
         run: |
           git add *.html
