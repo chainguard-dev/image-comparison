@@ -30,7 +30,7 @@ jobs:
       - name: checkout repo content
         # zizmor: ignore[artipacked] - the scoped octo-sts token below is intentionally
         # persisted for the `git push origin main` in the "commit files" step
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.2
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           token: ${{ steps.octo-sts.outputs.token }}
       - uses: imjasonh/setup-crane@00c9e93efa4e1138c9a7a5c594acd6c75a2fbf0c # v0.3
