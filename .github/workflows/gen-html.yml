@@ -47,7 +47,7 @@ jobs:
         uses: chainguard-dev/actions/setup-gitsign@ec48ea414c0cb207549029d8fe35f8f01e563219 # v1.0.8
       - name: commit files
         run: |
-          git add *.html
+          git add -- *.html
           git commit -m "update html"
           git push origin main
       - if: ${{ failure() && github.event_name == 'schedule' }}
