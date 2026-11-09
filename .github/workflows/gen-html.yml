@@ -51,7 +51,7 @@ jobs:
           git commit -m "update html"
           git push origin main
       - if: ${{ failure() && github.event_name == 'schedule' }}
-        uses: step-security/action-slack-notify@cafbebd7b2b3e2f62d6a3cebac172962e7f55c05 # v2.3.4
+        uses: chainguard-actions/rtCamp-action-slack-notify@0aa974ffa7b70fef9dbfa9542fe07276b68ab674 # v2.4.0
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_COLOR: '#8E1600'
